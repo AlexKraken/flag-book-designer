@@ -1,9 +1,13 @@
-let flagSlider
-let unitInputBox
+let flagSlider, unitInputBox
 let flags = []
-//let ppi = ((102 * 5 / 4.5) / 2).toFixed(0)
-let ppi = ((102 * 5 / 4.5)).toFixed(0)
+let ppi = ((102 * 5 / 4.5) / 2).toFixed(0) // Half-scale
 let addFlagButton
+
+const bookDimensions = [3, 5] // [width, height] in inches
+const PPI = ((102 * 5 / 4.5) / 2).toFixed(0) // Half-scale
+const scaleByPPI = x => {
+  return x * PPI
+}
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight)
@@ -22,7 +26,7 @@ function setup() {
 function draw() {
   background(255)
 
-  bookCover(3 * ppi, 5 * ppi)
+  bookCover(...bookDimensions.map(scaleByPPI))
 
   const flagHeight = unitInputBox.value() * flagSlider.value()
   let gap = floor((5 * ppi - flags.length * (flagHeight * ppi)) / (flags.length + 1))
@@ -58,7 +62,7 @@ function addFlag(width, height) {
 }
 
 function updateFlagSlider() {
-  flagSlider.position(100, height - 40)
+  flagSlider.position(width / 4, height - 40)
   flagSlider.style('width', `${width/2}px`)
 }
 
@@ -69,17 +73,4 @@ function updateUnitInputBox() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight)
-}
-
-class Flag {
-  constructor() {
-    this.x = 0
-    this.y = 0
-    this.width = 200
-    this.height = 100
-  }
-
-  display(height) {
-    rect(this.x, this.y, this.width, height * this.height)
-  }
 }
