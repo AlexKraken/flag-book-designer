@@ -1,9 +1,9 @@
 let flagSlider, unitInputBox
 let flagWidthBox, flagHeightBox
-let addFlagButton, addFlagButton2
+let addFlagButton
 let bookWidthBox, bookHeightBox
-let colorPickerArray = []
 
+const colorPickerArray = []
 const bookDimensions = [, ] // [width, height] in inches
 const PPI = ((102 * 5 / 4.5) / 2).toFixed(0) // Half-scale on 13" Macbook Pro Retina
 const scaleByPPI = x => {
@@ -36,7 +36,13 @@ function draw() {
 
   textSize(32)
   fill(0);
-  text(flagHeight, width / 2, height - 80)
+  textAlign(CENTER)
+  text(`Flag Height: ${flagHeight}"`, width / 2, height - 80)
+
+  textSize(16)
+  fill(0);
+  textAlign(CENTER)
+  text(`Book Dimensions: ${bookDimensions[0]}" x ${bookDimensions[1]}"`, width - 100, 25)
 }
 
 function createInterface() {
@@ -48,8 +54,6 @@ function createInterface() {
   bookHeightBox = createInput(`${5}`, 'number')
 
   addFlagButton = createButton('Add Flag')
-  addFlagButton.position(width - 100, height / 4)
-  addFlagButton.size(90, 50)
   addFlagButton.mousePressed(() => colorPickerArray.push(createColorPicker()))
 }
 
@@ -58,10 +62,10 @@ function updateInterface() {
 
   updateElement(unitInputBox, [width / 4 - 70, height - 40], ['width', '60px'])
 
-  updateElement(flagHeightBox, [width - 100, height / 2 - 60], ['width', '60px'])
-  updateElement(flagWidthBox, [width - 100, height / 2 - 90], ['width', '60px'])
+  updateElement(flagHeightBox, [width - 100, 250], ['width', '60px'])
+  updateElement(flagWidthBox, [width - 100, 225], ['width', '60px'])
 
-  updateElement(addFlagButton, [width - 100, height / 4], ['width', '60px'])
+  updateElement(addFlagButton, [width - 100, 150], ['width', '60px'])
 
   updateElement(bookWidthBox, [width - 100, 50], ['width', '60px'])
   updateElement(bookHeightBox, [width - 100, 75], ['width', '60px'])
