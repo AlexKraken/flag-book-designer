@@ -1,6 +1,6 @@
 let flagSlider, unitInputBox
 let flagWidthBox, flagHeightBox
-let addFlagButton
+let addFlagButton, removeFlagButton
 let bookWidthBox, bookHeightBox
 
 const colorPickerArray = []
@@ -55,6 +55,9 @@ function createInterface() {
 
   addFlagButton = createButton('Add Flag')
   addFlagButton.mousePressed(() => colorPickerArray.push(createColorPicker()))
+
+  removeFlagButton = createButton('Remove Flag')
+  removeFlagButton.mousePressed(() => colorPickerArray.pop().remove())
 }
 
 function updateInterface() {
@@ -66,6 +69,7 @@ function updateInterface() {
   updateElement(flagWidthBox, [width - 100, 225], ['width', '60px'])
 
   updateElement(addFlagButton, [width - 100, 150], ['width', '60px'])
+  updateElement(removeFlagButton, [width - 180, 150], ['width', '60px'])
 
   updateElement(bookWidthBox, [width - 100, 50], ['width', '60px'])
   updateElement(bookHeightBox, [width - 100, 75], ['width', '60px'])
