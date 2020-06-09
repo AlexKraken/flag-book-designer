@@ -37,16 +37,17 @@ function draw() {
   textSize(32)
   fill(0);
   textAlign(CENTER)
-  text(`Flag Height: ${flagHeight}"`, width / 2, height - 80)
+  text(`Flag Height: ${flagHeight}" Gap Width: ${(gap/PPI).toFixed(3)}"`, width / 2, height - 80)
 
   textSize(16)
   fill(0);
   textAlign(CENTER)
+
   text(`Book Dimensions: ${bookDimensions[0]}" x ${bookDimensions[1]}"`, width - 100, 25)
 }
 
 function createInterface() {
-  flagSlider = createSlider(0, 100, 10, 1)
+  flagSlider = createSlider(1, 100, 10, 1)
   unitInputBox = createInput(`${1/8}`, 'number')
   flagWidthBox = createInput(`${0}`, 'number')
   flagHeightBox = createInput(`${0}`, 'number')
