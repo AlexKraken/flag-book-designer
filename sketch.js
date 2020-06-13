@@ -29,18 +29,20 @@ function draw() {
     (flagHeight * PPI)) / (colorPickerArray.length + 1))
 
   for (const [index, colorPicker] of colorPickerArray.entries()) {
-    colorPickerArray[index].position(0, gap * (index + 1) + index * flagHeight * PPI)
+    colorPickerArray[index].position(PPI * bookDimensions[0], gap * (index + 1) + index * flagHeight * PPI)
     colorPickerArray[index].style('width', `${PPI * bookDimensions[0]}px`)
     colorPickerArray[index].style('height', `${flagHeight * PPI}px`)
+
+    rect(0, gap * (index + 1) + index * flagHeight * PPI, PPI * bookDimensions[0], flagHeight * PPI)
   }
 
   textSize(32)
-  fill(0);
+  fill(0)
   textAlign(CENTER)
   text(`Flag Height: ${flagHeight}" Gap Width: ${(gap/PPI).toFixed(3)}"`, width / 2, height - 80)
 
   textSize(16)
-  fill(0);
+  fill(0)
   textAlign(CENTER)
 
   text(`Book Dimensions: ${bookDimensions[0]}" x ${bookDimensions[1]}"`, width - 100, 25)
