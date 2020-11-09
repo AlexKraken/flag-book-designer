@@ -24,7 +24,7 @@ function draw() {
 
   addBookCover(...bookDimensions.map(scaleByPPI))
 
-  const flagHeight = unitInputBox.value() * flagSlider.value()
+  const flagHeight = flagSlider.value()
   const gap = floor((bookDimensions[1] * PPI - colorPickerArray.length *
     (flagHeight * PPI)) / (colorPickerArray.length + 1))
 
@@ -32,6 +32,7 @@ function draw() {
     colorPickerArray[index].position(PPI * bookDimensions[0], gap * (index + 1) + index * flagHeight * PPI)
     colorPickerArray[index].style('width', `${PPI * bookDimensions[0]}px`)
     colorPickerArray[index].style('height', `${flagHeight * PPI}px`)
+    colorPickerArray[index].style('box-sizing', 'border-box')
 
     rect(0, gap * (index + 1) + index * flagHeight * PPI, PPI * bookDimensions[0], flagHeight * PPI)
   }
@@ -41,15 +42,19 @@ function draw() {
   textAlign(CENTER)
   text(`Flag Height: ${flagHeight}" Gap Width: ${(gap/PPI).toFixed(3)}"`, width / 2, height - 80)
 
+
   textSize(16)
   fill(0)
   textAlign(CENTER)
 
   text(`Book Dimensions: ${bookDimensions[0]}" x ${bookDimensions[1]}"`, width - 100, 25)
+
+
+  updateInterface()
 }
 
 function createInterface() {
-  flagSlider = createSlider(1, 100, 10, 1)
+  flagSlider = createSlider(0, 5, 1, 1)
   unitInputBox = createInput(`${1/8}`, 'number')
   flagWidthBox = createInput(`${0}`, 'number')
   flagHeightBox = createInput(`${0}`, 'number')
@@ -65,6 +70,9 @@ function createInterface() {
 
 function updateInterface() {
   updateElement(flagSlider, [width / 4, height - 40], ['width', `${width/2}px`])
+  flagSlider.elt.min = unitInputBox.value()
+  flagSlider.elt.max = bookHeightBox.value() / colorPickerArray.length
+  flagSlider.elt.step = unitInputBox.value()
 
   updateElement(unitInputBox, [width / 4 - 70, height - 40], ['width', '60px'])
 
